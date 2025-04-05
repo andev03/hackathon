@@ -44,12 +44,11 @@ public class QnAService implements IQnAService {
         String typeReport = classifyReport(askQuestionRequestDto.getType());
 
         int realScore = realScore(askQuestionRequestDto.getTotalScore(), typeReport);
+
         String prompt = "Tôi đang ở " + realScore + " trên thang điểm "
                 + typeReport + ". Hãy cho tôi câu trả lời với 3 tiêu chí là lời khuyên, hướng dẫn giảm căng thẳng. " +
                 "Bắt đầu bằng 'chào bạn, điểm số '" + realScore + "trên thang điểm "
                 + typeReport + ", và làm ơn đừng in đậm câu trả lời của bạn";
-
-        System.out.println(prompt);
 
         Map<String, Object> requestBody = Map.of("contents", new Object[]{
                 Map.of("parts", new Object[]{

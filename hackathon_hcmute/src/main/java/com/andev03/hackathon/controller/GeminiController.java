@@ -16,7 +16,7 @@ import java.util.Map;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api/qna")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = "https://hackathon.nguyenhoangan.site")
 public class GeminiController {
 
     private final IQnAService qnAService;

@@ -39,6 +39,6 @@ CREATE TABLE result
 (
     result_id      BIGINT AUTO_INCREMENT PRIMARY KEY,
     account_id     BIGINT,
-    result_content VARCHAR(255),
+    result_content MEDIUMTEXT,
     FOREIGN KEY (account_id) REFERENCES account (account_id)
 );
