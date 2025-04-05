@@ -1,6 +1,8 @@
 package com.andev03.hackathon.service.impl;
 
 import com.andev03.hackathon.dto.AskQuestionRequestDto;
+import com.andev03.hackathon.repository.AnswerRepository;
+import com.andev03.hackathon.repository.QuestionRepository;
 import com.andev03.hackathon.service.IQnAService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -20,8 +22,11 @@ public class QnAService implements IQnAService {
 
     private final WebClient webClient;
 
-    public QnAService(WebClient.Builder webClient) {
+    private final QuestionRepository questionRepository;
+
+    public QnAService(WebClient.Builder webClient, QuestionRepository questionRepository) {
         this.webClient = webClient.build();
+        this.questionRepository = questionRepository;
     }
 
     @Override
@@ -29,12 +34,11 @@ public class QnAService implements IQnAService {
 
         String typeReport = classifyReport(askQuestionRequestDto.getType());
 
-        String prompt = "Tôi đang ở " + askQuestionRequestDto.getTotalScore() + " trên thang điểm "
+        int realScore = realScore(askQuestionRequestDto.getTotalScore(), typeReport);
+        String prompt = "Tôi đang ở " + realScore + " trên thang điểm "
                 + typeReport + ". Hãy cho tôi câu trả lời với 3 tiêu chí là lời khuyên, hướng dẫn giảm căng thẳng. " +
-                "Bắt đầu bằng 'chào bạn, điểm số '" + askQuestionRequestDto.getTotalScore() + "trên thang điểm "
-                + typeReport;
-
-        System.out.println(prompt);
+                "Bắt đầu bằng 'chào bạn, điểm số '" + realScore + "trên thang điểm "
+                + typeReport + ", và không có dấu *";
 
         Map<String, Object> requestBody = Map.of("contents", new Object[]{
                 Map.of("parts", new Object[]{
@@ -65,5 +69,10 @@ public class QnAService implements IQnAService {
             return "FQS (Friendship Qualities Scale)";
         }
         return "";
+    }
+
+    private int realScore(int totalScore, String typeReport) {
+        double realScore = totalScore * ((double) questionRepository.countByType(typeReport) / 15);
+        return (int) Math.ceil(realScore);
     }
 }
