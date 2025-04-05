@@ -171,7 +171,7 @@ VALUES ('user1@gmail.com', 'Nguyễn Văn A', '1000000001'),
        ('user9@gmail.com', 'Vũ Văn I', '1000000009'),
        ('user10@gmail.com', 'Đỗ Thị K', '1000000010');
 
-INSERT INTO answer (answer_content, answer_point, answerType)
+INSERT INTO answer (answer_content, answer_point, answer_type)
 VALUES ('Hoàn toàn không đồng ý', 1, 'STUDY'),
        ('Không đồng ý', 2, 'STUDY'),
        ('Không chắc chắn', 3, 'STUDY'),

@@ -9,7 +9,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 @Service
 @RequiredArgsConstructor
@@ -19,13 +21,22 @@ public class QuestionService implements IQuestionService {
 
     @Override
     public List<QuestionAnswerDto> getQuestionsByType(String type) {
-        List<Question> questions = questionRepository.findByType(type);
+        List<Question> questions = getRandomItems(questionRepository.findByType(type));
 
-        List<QuestionAnswerDto> result =  new ArrayList<>();
+        List<QuestionAnswerDto> result = new ArrayList<>();
 
         for (Question question : questions) {
             result.add(new QuestionAnswerDto(question, answerRepository.findByAnswerType(type)));
         }
+
         return result;
+    }
+
+    private static List<Question> getRandomItems(List<Question> totalList) {
+        List<Question> copyList = new ArrayList<>(totalList);
+
+        Collections.shuffle(copyList, new Random());
+
+        return copyList.subList(0, 15);
     }
 }
