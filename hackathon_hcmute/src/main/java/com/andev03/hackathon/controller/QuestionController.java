@@ -16,7 +16,7 @@ public class QuestionController {
     private final IQuestionService questionService;
 
     @GetMapping("/questions")
-    public ResponseEntity<QuestionAnswerDto> getQuestionsByType(@RequestParam(name = "type") String type) {
+    public ResponseEntity<Object> getQuestionsByType(@RequestParam(name = "type") String type) {
         return ResponseEntity.status(HttpStatus.OK).body(questionService.getQuestionsByType(type));
     }
 }
