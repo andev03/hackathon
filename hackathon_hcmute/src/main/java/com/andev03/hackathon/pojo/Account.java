@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -18,4 +20,6 @@ public class Account {
     private Long accountId;
     private String username;
     private String password;
+    @OneToMany(mappedBy = "account", fetch = FetchType.LAZY)
+    private List<Result> results;
 }
