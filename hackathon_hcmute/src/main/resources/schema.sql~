@@ -1,5 +1,13 @@
-DROP DATABASE IF EXISTS claim_request_db;
-CREATE TABLE IF NOT EXISTS account (
+SET FOREIGN_KEY_CHECKS=0;
+
+DROP TABLE IF EXISTS `account`;
+DROP TABLE IF EXISTS `question`;
+DROP TABLE IF EXISTS `answer`;
+DROP TABLE IF EXISTS `result`;
+
+SET FOREIGN_KEY_CHECKS=1;
+    
+CREATE TABLE account (
                          account_id BIGINT AUTO_INCREMENT PRIMARY KEY,
                          username VARCHAR(255),
                          fullname VARCHAR(255),
@@ -7,14 +15,14 @@ CREATE TABLE IF NOT EXISTS account (
 );
 
 -- Bảng câu hỏi
-CREATE TABLE IF NOT EXISTS question (
+CREATE TABLE question (
                           question_id BIGINT AUTO_INCREMENT PRIMARY KEY,
                           question_content VARCHAR(255),
                           type VARCHAR(255)
 );
 
 -- Bảng câu trả lời
-CREATE TABLE IF NOT EXISTS answer (
+CREATE TABLE answer (
                         answer_id BIGINT AUTO_INCREMENT PRIMARY KEY,
                         question_id BIGINT,
                         answer_content VARCHAR(255),
@@ -22,7 +30,7 @@ CREATE TABLE IF NOT EXISTS answer (
 );
 
 -- Bảng kết quả
-CREATE TABLE IF NOT EXISTS result (
+CREATE TABLE result (
                         result_id BIGINT AUTO_INCREMENT PRIMARY KEY,
                         account_id BIGINT,
                         result_content VARCHAR(255),
