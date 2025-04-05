@@ -16,8 +16,7 @@ public class Answer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long answerId;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "question_id", referencedColumnName = "questionId")
-    private Question question;
     private String answerContent;
+    private int answerPoint;
+    private String answerType;
 }

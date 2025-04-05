@@ -20,6 +20,4 @@ public class Question {
     private Long questionId;
     private String questionContent;
     private String type;
-    @OneToMany(mappedBy = "question", fetch = FetchType.LAZY)
-    private List<Answer> answers;
 }
