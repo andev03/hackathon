@@ -44,4 +44,10 @@ public class AccountServiceImpl implements IAccountService {
         accountDto.setUsername(account.get().getUsername());
         return accountDto;
     }
+
+    @Override
+    public Account findAccountByUsername(String username) {
+        Optional<Account> account = accountRepository.findByUsername(username);
+        return account.orElse(null);
+    }
 }

@@ -3,6 +3,7 @@ package com.andev03.hackathon.controller;
 import com.andev03.hackathon.dto.AccountDto;
 import com.andev03.hackathon.dto.LoginRequest;
 import com.andev03.hackathon.dto.ResponseDto;
+import com.andev03.hackathon.pojo.Account;
 import com.andev03.hackathon.service.IAccountService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -25,6 +26,13 @@ public class AccountController {
     public ResponseEntity<AccountDto> loginAccount(@RequestBody LoginRequest loginRequest) {
         AccountDto accountDto = iAccontService.loginAccount(loginRequest);
         return ResponseEntity.status(HttpStatus.OK).body(accountDto);
+    }
+
+    @GetMapping("/assessment-history")
+    public ResponseEntity<Account> getAssessmentHistory(String username) {
+        Account assessmentHistory = iAccontService.findAccountByUsername(username);
+        return ResponseEntity.status(HttpStatus.OK).body(assessmentHistory);
+
     }
 
 }

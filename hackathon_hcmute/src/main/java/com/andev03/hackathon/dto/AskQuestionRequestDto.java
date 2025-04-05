@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AskQuestionRequestDto {
 
+    private String username;
     private int totalScore;
     private String type;
 }
