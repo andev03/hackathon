@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping(path="/api", produces = {MediaType.APPLICATION_JSON_VALUE})
 @AllArgsConstructor
+@CrossOrigin(origins = "http://localhost:5173")
 public class QuestionController {
 
     private final IQuestionService questionService;

@@ -1,10 +1,8 @@
 package com.andev03.hackathon.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
@@ -22,5 +20,6 @@ public class Account {
     private String password;
     private String fullname;
     @OneToMany(mappedBy = "account", fetch = FetchType.LAZY)
+
     private List<Result> results;
 }

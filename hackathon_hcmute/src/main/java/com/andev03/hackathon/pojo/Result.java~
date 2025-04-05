@@ -19,6 +19,6 @@ public class Result {
     @JsonIgnore
     private Account account;
 
-    @Column(name = "result_content", columnDefinition = "LONGTEXT")
+    @Column(name = "result_content", columnDefinition = "TEXT")
     private String resultContent;
 }
