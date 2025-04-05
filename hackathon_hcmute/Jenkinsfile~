@@ -1,0 +1,44 @@
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Build Docker Image') {
+            steps{
+                sh 'docker build -f dev.Dockerfile -t project-backend:ver-${BUILD_ID} .'
+            }
+        }
+
+        stage('Upload image to ECR') {
+            steps{
+                sh """aws ecr get-login-password --region ap-southeast-1 | docker login --username AWS --password-stdin ${env.AWS_ECR_BE}"""
+                sh """docker tag project-backend:ver-${BUILD_ID} ${env.AWS_ECR_BE}:ver-${BUILD_ID}"""
+                sh """docker push ${env.AWS_ECR_BE}:ver-${BUILD_ID}"""
+            }
+        }
+
+        stage('Run container') {
+            steps {
+                script {
+                    sh "docker stop project-backend || true"
+                    sh """
+                    docker run -d \
+                      --network claim-network \
+                      -p ${env.PORT_BE_DEV}:8081 \
+                      --rm \
+                      --name project-backend \
+                      -e CALLBACK_FRONTEND_DEV_GOOGLE_URL=${env.CALLBACK_FRONTEND_DEV_GOOGLE_URL} \
+                      -e CALLBACK_FRONTEND_DEV_MICROSOFT_URL=${env.CALLBACK_FRONTEND_DEV_MICROSOFT_URL} \
+                      -e GOOGLE_CALLBACK_DEV_URL=${env.GOOGLE_CALLBACK_DEV_URL} \
+                      -e MICROSOFT_CALLBACK_DEV_URL=${env.MICROSOFT_CALLBACK_DEV_URL} \
+                      -e PORT_BE_DEV=${env.PORT_BE_DEV} \
+                      -e APP_URL=${env.FE_DEV_URL} \
+                      -e SPRING_PROFILES_ACTIVE=dev \
+                      project-backend:ver-${BUILD_ID}
+                    """
+                    sh "docker image prune -a -f"
+                 }
+            }
+        }
+    }
+}
