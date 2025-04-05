@@ -13,9 +13,14 @@ spring:
         dialect: org.hibernate.dialect.MySQL8Dialect
   sql:
     init:
-      mode: always
+      mode: never
       schema-locations: classpath:/schema.sql
       data-locations: classpath:/data.sql
 
   main:
     banner-mode: off
+
+gemini:
+  api:
+    url: https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=
+    key: AIzaSyBXWR8BHNoMmA_T0mjHT1T6P_Q06NlGCQ0

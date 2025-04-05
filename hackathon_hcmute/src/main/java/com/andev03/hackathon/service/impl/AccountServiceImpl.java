@@ -5,7 +5,7 @@ import com.andev03.hackathon.dto.LoginRequest;
 import com.andev03.hackathon.exception.AccountAlreadyExist;
 import com.andev03.hackathon.pojo.Account;
 import com.andev03.hackathon.repository.AccountRepository;
-import com.andev03.hackathon.service.IAccontService;
+import com.andev03.hackathon.service.IAccountService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +13,7 @@ import java.util.Optional;
 
 @Service
 @AllArgsConstructor
-public class AccountServiceImpl implements IAccontService {
+public class AccountServiceImpl implements IAccountService {
     private AccountRepository accountRepository;
     @Override
     public void createAccount(AccountDto accountRequest) {
@@ -43,5 +43,11 @@ public class AccountServiceImpl implements IAccontService {
         accountDto.setFullname(account.get().getFullname());
         accountDto.setUsername(account.get().getUsername());
         return accountDto;
+    }
+
+    @Override
+    public Account findAccountByUsername(String username) {
+        Optional<Account> account = accountRepository.findByUsername(username);
+        return account.orElse(null);
     }
 }
