@@ -14,6 +14,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class QuestionAnswerDto {
-    List<Question> questions;
+    Question questions;
     List<Answer> answers;
 }
