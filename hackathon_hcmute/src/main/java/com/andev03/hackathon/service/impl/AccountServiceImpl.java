@@ -30,7 +30,7 @@ public class AccountServiceImpl implements IAccontService {
     }
 
     @Override
-    public void loginAccount(LoginRequest loginRequest) {
+    public AccountDto loginAccount(LoginRequest loginRequest) {
         Optional<Account> account = accountRepository.findByUsername(loginRequest.getUsername());
         if (account.isEmpty()) {
             throw new AccountAlreadyExist("Wrong username or password");
@@ -38,5 +38,10 @@ public class AccountServiceImpl implements IAccontService {
         if (!account.get().getPassword().equals(loginRequest.getPassword())) {
             throw new AccountAlreadyExist("Wrong username or password");
         }
+        AccountDto accountDto = new AccountDto();
+        accountDto.setPassword(account.get().getPassword());
+        accountDto.setFullname(account.get().getFullname());
+        accountDto.setUsername(account.get().getUsername());
+        return accountDto;
     }
 }
