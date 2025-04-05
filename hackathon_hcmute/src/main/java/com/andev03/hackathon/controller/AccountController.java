@@ -3,7 +3,7 @@ package com.andev03.hackathon.controller;
 import com.andev03.hackathon.dto.AccountDto;
 import com.andev03.hackathon.dto.LoginRequest;
 import com.andev03.hackathon.dto.ResponseDto;
-import com.andev03.hackathon.service.IAccontService;
+import com.andev03.hackathon.service.IAccountService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @AllArgsConstructor
 @CrossOrigin(origins = "http://localhost:5173")
 public class AccountController {
-    private IAccontService iAccontService;
+    private IAccountService iAccontService;
     @PostMapping("/register")
     public ResponseEntity<ResponseDto> registerAccount(@RequestBody AccountDto accountDto) {
         iAccontService.createAccount(accountDto);
