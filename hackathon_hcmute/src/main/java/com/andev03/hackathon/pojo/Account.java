@@ -20,6 +20,7 @@ public class Account {
     private Long accountId;
     private String username;
     private String password;
+    private String fullname;
     @OneToMany(mappedBy = "account", fetch = FetchType.LAZY)
     private List<Result> results;
 }
