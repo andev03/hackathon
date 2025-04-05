@@ -176,7 +176,7 @@ VALUES ('Hoàn toàn không đồng ý', 1, 'STUDY'),
        ('Không đồng ý', 2, 'STUDY'),
        ('Không chắc chắn', 3, 'STUDY'),
        ('Đồng ý', 4, 'STUDY'),
-       ('Hoàn toàn đồng ý', 5, 'SOCIAL'), --STUDY
+       ('Hoàn toàn đồng ý', 5, 'STUDY'), --STUDY
        ('Rất không đồng ý', 1, 'SOCIAL'),
        ('Không đồng ý', 2, 'SOCIAL'),
        ('Trung lập', 3, 'SOCIAL'),

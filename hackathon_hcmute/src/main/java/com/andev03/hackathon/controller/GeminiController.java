@@ -1,5 +1,6 @@
 package com.andev03.hackathon.controller;
 
+import com.andev03.hackathon.dto.AskQuestionRequestDto;
 import com.andev03.hackathon.service.IQnAService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,9 +19,8 @@ public class GeminiController {
     private final IQnAService qnAService;
 
     @PostMapping("/ask")
-    public ResponseEntity<String> askQuestion(@RequestBody Map<String, String> payload) {
-        String question = payload.get("question");
-        String answer = qnAService.getAnswer(question);
+    public ResponseEntity<String> askQuestion(@RequestBody AskQuestionRequestDto askQuestionRequestDto) {
+        String answer = qnAService.getAnswer(askQuestionRequestDto);
         return ResponseEntity.ok(answer);
     }
 }
