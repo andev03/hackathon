@@ -25,8 +25,8 @@ public class GeminiController {
     @PostMapping("/ask")
     public ResponseEntity<String> askQuestion(@RequestBody AskQuestionRequestDto askQuestionRequestDto) throws JsonProcessingException {
         String answer = qnAService.getAnswer(askQuestionRequestDto);
+        if (askQuestionRequestDto.getUsername() == null) return ResponseEntity.ok(answer);
         ObjectMapper mapper = new ObjectMapper();
-
         JsonNode root = mapper.readTree(answer);
         String text = root
                 .path("candidates").get(0)
