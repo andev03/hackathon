@@ -43,7 +43,7 @@ public class QnAService implements IQnAService {
 
         String typeReport = classifyReport(askQuestionRequestDto.getType());
 
-        int realScore = realScore(askQuestionRequestDto.getTotalScore(), typeReport);
+        int realScore = realScore(askQuestionRequestDto.getTotalScore(), askQuestionRequestDto.getType().toUpperCase());
 
         String prompt = "Tôi đang ở " + realScore + " trên thang điểm "
                 + typeReport + ". Hãy cho tôi câu trả lời với 3 tiêu chí là lời khuyên, hướng dẫn giảm căng thẳng. " +

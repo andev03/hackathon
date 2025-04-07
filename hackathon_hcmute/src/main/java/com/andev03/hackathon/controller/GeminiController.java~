@@ -2,6 +2,7 @@ package com.andev03.hackathon.controller;
 
 import com.andev03.hackathon.dto.AskQuestionRequestDto;
 import com.andev03.hackathon.dto.ResultDto;
+import com.andev03.hackathon.pojo.Result;
 import com.andev03.hackathon.repository.AccountRepository;
 import com.andev03.hackathon.service.IQnAService;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -11,6 +12,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
 
 @RestController
 @AllArgsConstructor
